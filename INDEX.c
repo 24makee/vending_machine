@@ -100,6 +100,7 @@ int main()
 						printf_3t("Pin invalid!");
 						break;
 			   }
+			   printf_3t("Press any key to restart!");
 			   getch();
             }
 
