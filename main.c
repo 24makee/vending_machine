@@ -23,6 +23,7 @@ int main()
     char pin[5];
     PRODUS prod;
 	while (1) {
+    inceput:
 	clrscr();
     afisareProduse();
 	printf("\t\t\tCredit: $%d - waiting transaction\n", available_money);
@@ -83,6 +84,8 @@ int main()
     {
         printf("\t\t\tChoose your product\n");
         tasta = getch();
+        if(tasta=='x')
+            goto inceput;
         //if(tasta=='1' || tasta=='2' || tasta=='3' || tasta=='4' || tasta=='5' || tasta=='6')
 		if ( eProdus(tasta) )
 			codProdus = tasta - '0';
@@ -92,6 +95,10 @@ int main()
                 int p=0;
                 do {
                     pin[p]=getch();
+                    if(pin[p]=='x')
+                    {   printf("\t\t\tPayment canceled!\n");
+                        goto inceput;
+                    }
 			printf("*");
                     p++;
                 } while(p<4);
