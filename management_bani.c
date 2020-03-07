@@ -23,8 +23,9 @@ void cash_payment(int *total_introdus)
     int bani=0;
     char tasta;
 start:
-    printf("\t\t\tEnter your money: \n");
-    printf("\t\t\t($1 $5 $10 $20 $50 $100)\n");
+    printf("\t\t\tEnter one of the following bills: \n");
+    printf("\t\t\t    ($1 $5 $10 $20 $50 $100)\n");
+    printf("\t\t\t\t\t");
     scanf("%d",&bancnota);
     getchar();
     if(bancnota==1 || bancnota==5 || bancnota==10 || bancnota==20 || bancnota==50 || bancnota==100 )
@@ -34,8 +35,9 @@ start:
         printf("\t\t\tYou have entered $%d \n",bani);
         printf("\t\t\tDo you want to enter more money?\n");
         printf("\t\t\tPress 1 for YES or 2 for NO\n\n");
-
+        //printf("\t\t\t\t");
         tasta=getch();
+       // printf("\n");
         if(tasta=='1')
             goto start;
         else if(tasta=='2')
