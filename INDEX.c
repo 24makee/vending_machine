@@ -11,7 +11,7 @@ int main()
 {
     char tasta;
     char nume[20];
-    int pret, codProdus, epErr;
+    int pret, codProdus, cpErr;
     int available_money=0;
     char pin[5];
 	while (1) {
@@ -84,7 +84,7 @@ int main()
 						if ( cumpara(codProdus) ) {
 							printf_3t("The product is being delivered");
 						} else {
-							restore_card(pret, pin);
+							card_restore(pret, pin);
 						}
 						break;
 					case -1:

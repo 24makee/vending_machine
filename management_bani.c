@@ -66,7 +66,7 @@ start:
 int card_payment(int pret, int entered_pin)
 {
     CREDIT_CARD card;
-    FILE *f;
+    FILE * f;
     int pin;
     int ok=0;
     int balance;
@@ -97,6 +97,7 @@ int card_payment(int pret, int entered_pin)
 
 int card_restore(int pret, int pin) {
 	CREDIT_CARD card;
+	FILE * f;
 	size_t soc = sizeof(CREDIT_CARD);
     f=fopen(filename_bank,"r+b");
 	if ( f == NULL ) { return 0; }
