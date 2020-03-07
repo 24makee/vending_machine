@@ -19,7 +19,7 @@ int main()
     afisareProduse();
 	printf("\t\t\tCredit: $%d - waiting transaction\n", available_money);
     printf_3t("Choose your payment method");
-    printf_3t("Press 1 for CASH or 2 for CARD");
+    printf_3t("Press 1 for CASH or 2 for CARD or 'h' for admin");
     tasta = getch();
     if(tasta == '1')
     {
@@ -54,6 +54,7 @@ int main()
 				printf("\t\t\tChange: $%d being delivered\n", available_money);
 				available_money = 0;
 			} else { printf_3t("No credit remaining"); }
+			printf_3t("Press any key to continue");
 			getch();
 			//break;
 		//}
@@ -104,6 +105,9 @@ int main()
 			   getch();
             }
 
+    } else if ( tasta == 'a' ) {
+	clrscr();
+	
     }
 
 
