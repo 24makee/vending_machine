@@ -27,7 +27,7 @@ int main()
     afisareProduse();
 	printf("\t\t\tCredit: $%d - waiting transaction\n", available_money);
     printf_3t("Choose your payment method");
-    printf_3t("Press 1 for CASH or 2 for CARD or 'a' for maintenance or 'o' to turn machine off");
+    printf_3t("Press 1 for CASH or 2 for CARD or \n \t      'a' for maintenance or 'o' to turn machine off");
     tasta = getch();
     if(tasta == '1')
     {
