@@ -1,14 +1,17 @@
-#include <conio.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+//#include <conio.h>
+//#include <stdio.h>
+//#include <string.h>
+//#include <stdlib.h>
+//biblioteci incluse in fisierul principal
+
 
 char filename_bank[]="banking_info.bin";
-typedef struct
+/*typedef struct
 {
     int pin;
     int balance;
-} CREDIT_CARD;
+} CREDIT_CARD;*/ 
+//definita in struct.h
 
 
 void bill(int pret)
@@ -100,7 +103,7 @@ finish:
 
 }
 
-int main()
+/*int main()
 {
     //card_payment(30,3657);
     //bill(40);
@@ -119,7 +122,7 @@ int main()
 //    }
 //    fclose(f);
 
-}
+}*/
 
 
 

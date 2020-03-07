@@ -1,14 +1,17 @@
-#include <stdio.h>
-#include <conio.h>
-#include <time.h>
-#include <string.h>
-#include <stdlib.h>
-typedef struct
+//#include <stdio.h>
+//#include <conio.h>
+//#include <time.h>
+//#include <string.h>
+//#include <stdlib.h>
+//biblioteci incluse in fisierul main
+
+
+/*typedef struct
 {
     char nume[20];
     int pret, cod, stoc;
-} PRODUS;
-#include "func.c"
+} PRODUS;*/ //structura definita in struct.h inclus in fisierul main
+//#include "func.c" //same shit
 
 char *available( int cod )
 {
