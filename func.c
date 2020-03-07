@@ -34,7 +34,18 @@ char getch() {
 #endif // __linux__
 
 
-char filename_catalog[] = "catalog.bin";
+
+
+const char filename_catalog[] = "catalog.bin";
+const char filename_adminpw[] = "admin_password.txt";
+const char filename_buylog[] = "buy.csv";
+const char filename_errorlog[] = "error.log";
+
+void error ( char * msg ) {
+    FILE * f = fopen(filename_errorlog, "at");
+    fclose(f);
+}
+
 
 void clrscr() {
     system("@cls||clear");
@@ -47,6 +58,45 @@ void printf_3t ( char * s ) {
 char* itoa(int value, char * buffer, int base) {
     sprintf(buffer,"%d",value);
     return buffer;
+}
+
+int ask_admin_pw() {
+    clrscr();
+    char password[30], entered_pw[30];
+    int p=0;
+    FILE * f = fopen(filename_adminpw, "rt");
+    if ( f == NULL ) { error("admin:Unable to open password file"); return 0; }
+    if ( !fscanf(f, "%s", password) ) { error("admin:Unable to read from file"); return 0; }
+    fclose(f);
+    printf_3t("MAINTENANCE");
+    printf("Enter password: ");
+    /*do {
+	entered_pw[p] = getch();
+	printf("*");
+	p++;
+    } while ( entered_pw[p-1]!='\n' || entered_pw[p-1]!='\r' || entered_pw[p-1]!= '\0' || p<=30 );*/
+    scanf("%s", entered_pw);
+    getch();
+    if ( strcmp(entered_pw, password) == 0 ) { clrscr(); return 1; }
+    else {
+	printf_3t("Wrong password! Press any key to continue.");
+	getch();
+    }
+    clrscr();
+    return 0;
+}
+
+void show_items() {
+	printf_3t("MAINTENANCE");
+	printf_3t("Current stock:");
+	printf ( "%-7s%-20s%-10s%-10s\n", "Code", "Name", "Price", "Items in device");
+	FILE * f = fopen(filename_catalog, "rb");
+	if ( f == NULL ) { printf("Error code 2\n"); }
+	PRODUS prod;
+	while ( fread(&prod, sop, 1, f) ) {
+	    printf("%-7d%-20s$%-10d%-10d\n", prod.cod, prod.nume, prod.pret, prod.stoc);
+	}
+	fclose(f);
 }
 
 
@@ -78,6 +128,7 @@ int aprovizioneaza ( int codProdus, int cantitate, int pret, char numeProdus[] )
 	strcpy(prod.nume, numeProdus);
 	if(fwrite(&prod, sop, 1, f)) { ret = 1; }
     }
+    fclose(f);
     return ret;
 }
 

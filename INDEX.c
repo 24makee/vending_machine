@@ -1,3 +1,10 @@
+/* (c) segmentation fault team 2020
+ * email: segmentationfault@mihneac.com
+ *  - marius
+ *  - make
+ *  - mihneac
+*/
+
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -11,15 +18,16 @@ int main()
 {
     char tasta;
     char nume[20];
-    int pret, codProdus, cpErr, int_pin;
+    int pret, codProdus, cpErr, int_pin, read_params;
     int available_money=0;
     char pin[5];
+    PRODUS prod;
 	while (1) {
 	clrscr();
     afisareProduse();
 	printf("\t\t\tCredit: $%d - waiting transaction\n", available_money);
     printf_3t("Choose your payment method");
-    printf_3t("Press 1 for CASH or 2 for CARD or 'h' for admin");
+    printf_3t("Press 1 for CASH or 2 for CARD or 'a' for maintenance or 'o' to turn machine off");
     tasta = getch();
     if(tasta == '1')
     {
@@ -106,8 +114,34 @@ int main()
             }
 
     } else if ( tasta == 'a' ) {
+	if ( !ask_admin_pw() ) continue;
 	clrscr();
-	
+	show_items();
+	printf("\n");
+	printf("Do you want to add new products? y=YES, [n]=NO");
+	tasta = getch();
+	if ( tasta == 'y' ) {
+	while ( tasta == 'y' ) {
+	    clrscr();
+	    show_items();
+	    prod.pret = 0;
+	    strcpy(prod.nume, "a");
+	    printf("Insert product information: for existing products insert only code and number of added items.\nFor new products insert all details.:\n");
+	    printf("code, stock, price, name: ");
+	    read_params = scanf ( "%d, %d, %d, %s", &prod.cod, &prod.stoc, &prod.pret, prod.nume);
+	    if(aprovizioneaza(prod.cod, prod.stoc, prod.pret, prod.nume)) {
+		printf("product supplied\n");
+	    } else  {
+		printf("System error 3 - try again or contact developer");
+	    }
+	    printf("Add another product? y=YES, [n]=NO");
+	    getch();
+	    tasta = getch();
+	    //if ( getch() != 'y' ) { break; } //iesire bucla aprovizionare
+	}
+	}
+    } else if ( tasta == 'o' ) {
+	exit(0);
     }
 
 
