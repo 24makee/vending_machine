@@ -72,7 +72,7 @@ int main()
                 int p=0;
                 do {
                     pin[p]=getch();
-					printf("*");
+			printf("*");
                     p++;
                 } while(p<4);
                 pin[p]='\0';
@@ -85,7 +85,7 @@ int main()
 						if ( cumpara(codProdus) ) {
 							printf_3t("The product is being delivered");
 						} else {
-						    atoi(pin);
+							printf_3t("Deliver error. Restoring money on card");
 							card_restore(pret, int_pin);
 						}
 						break;
@@ -96,6 +96,7 @@ int main()
 						printf_3t("Card error. No money has been withdrawn");
 						break;
 			   }
+			   getch();
             }
 
     }
