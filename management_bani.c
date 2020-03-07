@@ -1,8 +1,9 @@
-#include <sys/types.h>
-#include <sys/time.h>
+
+#include <conio.h>
 #include <stdio.h>
 #include <string.h>
-#include <unistd.h>
+
+#include <stdlib.h>
 
 char filename_bank[]="banking_info.bin";
 typedef struct
@@ -15,13 +16,6 @@ typedef struct
 void bill(int pret)
 {
     printf("\t\t\tTotal amount to be payed is: %.2d\n\n\n",pret);
-}
-int wait(int seconds)
-{
-    clock_t end_wait=(clock() + (seconds * CLOCKS_PER_SEC));
-    while(clock()<end_wait)
-    {}
-    return 1;
 }
 
 /////////CAZUL CASH
@@ -40,10 +34,9 @@ start:
         bani=bani+bancnota;
         printf("\t\t\tYou have entered $%d \n",bani);
         printf("\t\t\tDo you want to enter more money?\n");
-        printf("\t\t\tPress 1 for YES or 2 for NO\n");
-        getch(tasta);
-        atoi(tasta);
-        if(tasta==1)
+        printf("\t\t\tPress 1 for YES or 2 for NO\n\n");
+        tasta=getch();
+        if(tasta=='1')
             goto start;
         else
         {
