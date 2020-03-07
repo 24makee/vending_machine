@@ -76,7 +76,7 @@ int ask_admin_pw() {
 	p++;
     } while ( entered_pw[p-1]!='\n' || entered_pw[p-1]!='\r' || entered_pw[p-1]!= '\0' || p<=30 );*/
     scanf("%s", entered_pw);
-    getch();
+    //getch();
     if ( strcmp(entered_pw, password) == 0 ) { clrscr(); return 1; }
     else {
 	printf_3t("Wrong password! Press any key to continue.");
