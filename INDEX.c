@@ -11,7 +11,7 @@ int main()
 {
     char tasta;
     char nume[20];
-    int pret, codProdus, cpErr;
+    int pret, codProdus, cpErr, int_pin;
     int available_money=0;
     char pin[5];
 	while (1) {
@@ -78,15 +78,15 @@ int main()
                 pin[p]='\0';
               //  printf("\nYou have entered %s as pin.",pin);
               //  getch();
-              atoi(pin);
-               cpErr = card_payment(pret, pin);
+              int_pin = atoi(pin);
+               cpErr = card_payment(pret, int_pin);
 			   switch ( cpErr ) {
 					case 1:
 						if ( cumpara(codProdus) ) {
 							printf_3t("The product is being delivered");
 						} else {
 						    atoi(pin);
-							card_restore(pret, pin);
+							card_restore(pret, int_pin);
 						}
 						break;
 					case -1:
