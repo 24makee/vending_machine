@@ -11,7 +11,7 @@ int main()
 {
     char tasta;
     char nume[20];
-    int pret, codProdus;
+    int pret, codProdus, epErr;
     int available_money=0;
     char pin[5];
 	while (1) {
@@ -65,27 +65,35 @@ int main()
         tasta = getch();
         //if(tasta=='1' || tasta=='2' || tasta=='3' || tasta=='4' || tasta=='5' || tasta=='6')
 		if ( eProdus(tasta) )
-            if(verificaStoc(tasta-'0', &pret, nume))
+			codProdus = tasta - '0';
+            if(verificaStoc(codProdus, &pret, nume))
             {
                 printf("\t\t\tPIN: ");
                 int p=0;
-                do
-                {
+                do {
                     pin[p]=getch();
-                    /*if(pin[p]!='\r')
-                    {
-                        printf("*");
-                    }*/
-					/*if (4 ) {
-						break;
-					}*/
 					printf("*");
                     p++;
                 } while(p<4);
                 pin[p]='\0';
-                printf("\nYou have entered %s as pin.",pin);
-                getch();
-                card_payment(pret, pin);
+              //  printf("\nYou have entered %s as pin.",pin);
+              //  getch();
+               cpErr = card_payment(pret, pin);
+			   switch ( cpErr ) {
+					1:
+						if ( cumpara(codProdus) ) {
+							printf_3t("The product is being delivered");
+						} else {
+							restore_card(pret, pin);
+						}
+						break;
+					-1:
+						printf_3t("Not enough balance on card. Saracule!");
+						break;
+					-2:
+						printf_3t("Card error. No money has been withdrawn");
+						break;
+			   }
             }
 
     }
