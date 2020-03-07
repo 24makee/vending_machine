@@ -1,5 +1,4 @@
 #include <stdio.h>
-//#include <conio.h>
 #include <time.h>
 #include <string.h>
 #include "struct.h"
@@ -57,7 +56,7 @@ int main()
 			} else { printf_3t("No credit remaining"); } 
 			getch();
 			//break;
-		}
+		//}
 
     } // endif
     else if(tasta == '2')
@@ -68,15 +67,19 @@ int main()
 		if ( eProdus(tasta) )
             if(verificaStoc(tasta-'0', &pret, nume))
             {
-                printf("pin:\n");
+                printf("\t\t\tPIN: ");
                 int p=0;
                 do
                 {
                     pin[p]=getch();
-                    if(pin[p]!='\r')
+                    /*if(pin[p]!='\r')
                     {
                         printf("*");
-                    }
+                    }*/
+					if ( pin[p] == '\n' || pin[p] == '\r' ) {
+						break;
+					}
+					printf("*");
                     p++;
                 }
                 while(pin[p-1]!='\r');
