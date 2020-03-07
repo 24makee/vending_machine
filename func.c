@@ -1,11 +1,38 @@
-// <stdio.h>
-//e <stdlib.h>
-//clude <string.h>
-
-// "struct.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//#include "struct.h"
 
 // pentru prototipul functiei getch()
-#include <termios.h>
+#ifdef __linux__
+#include "termios.h"
+static struct termios old, new;
+
+
+void initTermios(int echo)
+{
+  tcgetattr(0, &old); //grab old terminal i/o settings
+  new = old; //make new settings same as old settings
+  new.c_lflag &= ~ICANON; //disable buffered i/o
+  new.c_lflag &= echo ? ECHO : ~ECHO; //set echo mode
+  tcsetattr(0, TCSANOW, &new); //apply terminal io settings
+}
+
+/* Restore old terminal i/o settings */
+void resetTermios(void)
+{
+  tcsetattr(0, TCSANOW, &old);
+}
+
+char getch() {
+    char ch;
+    initTermios(0);
+    ch = getchar();
+    resetTermios();
+    return ch;
+}
+#endif // __linux__
+
 
 char filename_catalog[] = "catalog.bin";
 
@@ -106,28 +133,4 @@ int cumpara ( int codProdus ) {
 }
 
 
-static struct termios old, new;
 
-
-void initTermios(int echo) 
-{
-  tcgetattr(0, &old); //grab old terminal i/o settings
-  new = old; //make new settings same as old settings
-  new.c_lflag &= ~ICANON; //disable buffered i/o
-  new.c_lflag &= echo ? ECHO : ~ECHO; //set echo mode
-  tcsetattr(0, TCSANOW, &new); //apply terminal io settings
-}
- 
-/* Restore old terminal i/o settings */
-void resetTermios(void) 
-{
-  tcsetattr(0, TCSANOW, &old);
-}
-
-char getch() {
-    char ch;
-    initTermios(0);
-    ch = getchar();
-    resetTermios();
-    return ch;
-}
