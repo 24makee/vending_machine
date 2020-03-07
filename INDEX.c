@@ -48,12 +48,12 @@ int main()
 		//printf("\t\t\tCredit remaining: $%d\n", available_money);
 		//printf_3t("Buy another product? 1=YES, 2=NO");
 		//tasta = getch();
-		//if ( tasta != '1' ) { 
+		//if ( tasta != '1' ) {
 		// rest
 			if ( available_money > 0 ) {
 				printf("\t\t\tChange: $%d being delivered\n", available_money);
 				available_money = 0;
-			} else { printf_3t("No credit remaining"); } 
+			} else { printf_3t("No credit remaining"); }
 			getch();
 			//break;
 		//}
@@ -78,12 +78,14 @@ int main()
                 pin[p]='\0';
               //  printf("\nYou have entered %s as pin.",pin);
               //  getch();
+              atoi(pin);
                cpErr = card_payment(pret, pin);
 			   switch ( cpErr ) {
 					case 1:
 						if ( cumpara(codProdus) ) {
 							printf_3t("The product is being delivered");
 						} else {
+						    atoi(pin);
 							card_restore(pret, pin);
 						}
 						break;
