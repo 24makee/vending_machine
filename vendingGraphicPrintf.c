@@ -37,7 +37,7 @@ char *available( int cod )
     }
     return msg;
 }
-int main()
+void afisareProduse()
 {
     char sold[10] = "SOLD  OUT";
     int i;
@@ -56,7 +56,5 @@ int main()
     printf("\t\t|           |  |           |  |           |\n");
     printf("\t\t| %s |  | %s |  | %s |\n", available(4), available(5), available(6));
     printf("\t\t|___________|  |___________|  |___________|\n");
-
-
-    printf("\n\t\t\tThe item is being delivered!\n");
 }
+
