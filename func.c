@@ -1,8 +1,8 @@
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
+// <stdio.h>
+//e <stdlib.h>
+//clude <string.h>
 
-//#include "struct.h"
+// "struct.h"
 
 // pentru prototipul functiei getch()
 #include <termios.h>
