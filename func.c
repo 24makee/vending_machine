@@ -133,13 +133,13 @@ int aprovizioneaza ( int codProdus, int cantitate, int pret, char numeProdus[] )
 }
 
 void log_transaction ( int productCode, char * payMethod ) {
-    FILE * f = fopen ( filename_buylog, "a" );
+    /*FILE * f = fopen ( filename_buylog, "a" );
     if ( f == NULL ) { error("csvLogger:Unable to open file"); return; }
     //get current date
     time_t t;
     time(&t);
     if ( !fprintf(f, "%s,%s,%d\n", ctime(t), payMethod, productCode) ) { error("csvLogger:Unable to write csv"); }
-    fclose(f);
+    fclose(f);*/
 }
 
 
