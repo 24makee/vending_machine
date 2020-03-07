@@ -1,8 +1,6 @@
-
 #include <conio.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <stdlib.h>
 
 char filename_bank[]="banking_info.bin";
@@ -19,29 +17,35 @@ void bill(int pret)
 }
 
 /////////CAZUL CASH
-int cash_payment(int *total_introdus)
+void cash_payment(int *total_introdus)
 {
     int bancnota=-1;
     int bani=0;
     char tasta;
 start:
     printf("\t\t\tEnter your money: \n");
-    printf("\t\t\t($5 $10 $20 $50 $100)\n");
+    printf("\t\t\t($1 $5 $10 $20 $50 $100)\n");
     scanf("%d",&bancnota);
     getchar();
-    if(bancnota==5 || bancnota==10 || bancnota==20 || bancnota==50 || bancnota==100 )
+    if(bancnota==1 || bancnota==5 || bancnota==10 || bancnota==20 || bancnota==50 || bancnota==100 )
     {
         bani=bani+bancnota;
+        scan_tasta:
         printf("\t\t\tYou have entered $%d \n",bani);
         printf("\t\t\tDo you want to enter more money?\n");
         printf("\t\t\tPress 1 for YES or 2 for NO\n\n");
+
         tasta=getch();
         if(tasta=='1')
             goto start;
-        else
+        else if(tasta=='2')
         {
+            printf("\t\t\tYou have entered $%d \n",bani);
             *total_introdus=bani;
-            return 1;
+        }
+        else{
+            printf("\t\t\tInvalid input!\n");
+            goto scan_tasta;
         }
     }
     else
@@ -98,23 +102,20 @@ int main()
 {
     //card_payment(30,3657);
     //bill(40);
-    if(cash_payment(40)==1)
-    {
-        printf("\t\t\tThe item is being delivered!\n");
-        printf("\t\t\tThank you for the purchase!\n");
-        printf("\t\t\tHave a nice day!\n");
-    }
-    FILE *f;
-    CREDIT_CARD card;
-    int i;
-    f=fopen("banking_info.bin","rb");
-    for(i=0; i<5; i++)
-    {
-        fread(&card,sizeof(CREDIT_CARD),1,f);
-        printf("Pinul %d este: %d \n",i+1,card.pin);
-        printf("Balanta %d este: %d \n",i+1,card.balance);
-    }
-    fclose(f);
+    int available_money=0;
+    cash_payment(&available_money);
+    //printf("%d",available_money);
+//    FILE *f;
+//    CREDIT_CARD card;
+//    int i;
+//    f=fopen("banking_info.bin","rb");
+//    for(i=0; i<5; i++)
+//    {
+//        fread(&card,sizeof(CREDIT_CARD),1,f);
+//        printf("Pinul %d este: %d \n",i+1,card.pin);
+//        printf("Balanta %d este: %d \n",i+1,card.balance);
+//    }
+//    fclose(f);
 
 }
 
