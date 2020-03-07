@@ -80,17 +80,17 @@ int main()
               //  getch();
                cpErr = card_payment(pret, pin);
 			   switch ( cpErr ) {
-					1:
+					case 1:
 						if ( cumpara(codProdus) ) {
 							printf_3t("The product is being delivered");
 						} else {
 							restore_card(pret, pin);
 						}
 						break;
-					-1:
+					case -1:
 						printf_3t("Not enough balance on card. Saracule!");
 						break;
-					-2:
+					case -2:
 						printf_3t("Card error. No money has been withdrawn");
 						break;
 			   }
