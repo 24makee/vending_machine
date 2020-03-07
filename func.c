@@ -41,8 +41,15 @@ const char filename_adminpw[] = "admin_password.txt";
 const char filename_buylog[] = "buy.csv";
 const char filename_errorlog[] = "error.log";
 
+char * curr_time () {
+    time_t t;
+    time(&t);
+    return ctime(&t);
+}
+
 void error ( char * msg ) {
     FILE * f = fopen(filename_errorlog, "at");
+    fprintf(f, "%s,%s", msg,curr_time());
     fclose(f);
 }
 
@@ -133,13 +140,10 @@ int aprovizioneaza ( int codProdus, int cantitate, int pret, char numeProdus[] )
 }
 
 void log_transaction ( int productCode, char * payMethod ) {
-    /*FILE * f = fopen ( filename_buylog, "a" );
+    FILE * f = fopen ( filename_buylog, "a" );
     if ( f == NULL ) { error("csvLogger:Unable to open file"); return; }
-    //get current date
-    time_t t;
-    time(&t);
-    if ( !fprintf(f, "%s,%s,%d\n", ctime(t), payMethod, productCode) ) { error("csvLogger:Unable to write csv"); }
-    fclose(f);*/
+    if ( !fprintf(f, "%s,%d,%s", payMethod, productCode, curr_time()) ) { error("csvLogger:Unable to write csv"); }
+    fclose(f);
 }
 
 
