@@ -78,6 +78,7 @@ int main()
                 pin[p]='\0';
               //  printf("\nYou have entered %s as pin.",pin);
               //  getch();
+              printf("\t\t\t\n");
               int_pin = atoi(pin);
                cpErr = card_payment(pret, int_pin);
 			   switch ( cpErr ) {
