@@ -132,6 +132,17 @@ int aprovizioneaza ( int codProdus, int cantitate, int pret, char numeProdus[] )
     return ret;
 }
 
+void log_transaction ( int productCode, char * payMethod ) {
+    FILE * f = fopen ( filename_buylog, "a" );
+    if ( f == NULL ) { error("csvLogger:Unable to open file"); return; }
+    //get current date
+    time_t t;
+    time(&t);
+    if ( !fprintf(f, "%s,%s,%d\n", ctime(t), payMethod, productCode) ) { error("csvLogger:Unable to write csv"); }
+    fclose(f);
+}
+
+
 int verificaStoc ( int codProdus, int * pret, char * nume ) {
     FILE * f = fopen(filename_catalog, "rb");
     if ( f == NULL ) return 0;
@@ -169,6 +180,7 @@ int cumpara ( int codProdus ) {
     // se cumpara cantitate 1
     int ret = 0;
     FILE * f = fopen(filename_catalog, "r+b");
+    if ( f == NULL ) { error("buy:Unable to open catalog file"); return 0; }
     PRODUS prod;
     size_t sop = sizeof(PRODUS);
     while ( fread(&prod, sop, 1, f) ) {
@@ -176,6 +188,7 @@ int cumpara ( int codProdus ) {
 	    prod.stoc -= 1;
 	    fseek(f, -sop, SEEK_CUR);
 	    if (fwrite(&prod, sop, 1, f)) { ret = 1; }
+	    else { error("buy:Unable to write to catalog file"); }
 	    break;
 	}
     }

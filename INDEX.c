@@ -41,6 +41,7 @@ int main()
 				if ( pret <= available_money ) {
 					if ( cumpara(codProdus) ) {
 						available_money -= pret;
+						log_transaction(codProdus, "cash");
 						printf_3t("The product is being delivered");
 						//printf("\t\t\tRemaining credit: $%d\n", available_money);
 					} else {
@@ -94,6 +95,7 @@ int main()
 					case 1:
 						if ( cumpara(codProdus) ) {
 							printf_3t("The product is being delivered");
+							log_transaction(codProdus, "card");
 						} else {
 							printf_3t("Deliver error. Restoring money on card");
 							card_restore(pret, int_pin);

@@ -73,12 +73,13 @@ int card_payment(int pret, int entered_pin)
 	int ret = 0;
 	size_t soc = sizeof(CREDIT_CARD);
     f=fopen(filename_bank,"r+b");
-	if ( f == NULL ) { return -2; }
+	if ( f == NULL ) { error("cardPay:Cannot open card file"); return -2; }
     while ( fread(&card,soc,1,f) ) {
 //        printf("%d %d\n",card.pin,card.balance);
         if ( card.pin == entered_pin ) {
 			if(card.balance<pret) {
 				ret = -1;
+				error("cardPay:Sarac");
 				break;
 			} else {
 				card.balance=card.balance-pret;
@@ -87,7 +88,7 @@ int card_payment(int pret, int entered_pin)
 					// plata autorizata
 					fclose(f);
 					return 1;
-				} else { ret = -2; }
+				} else { error("cardPay:Cannot withdraw money from card"); ret = -2; }
 			}
 		}
 	}
