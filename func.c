@@ -4,7 +4,13 @@
 
 //#include "struct.h"
 
+// pentru prototipul functiei getch()
+#include <termios.h>
 
+char* itoa(int value, char * buffer, int base) {
+    sprintf(buffer,"%d",value);
+    return buffer;
+}
 
 char filename_catalog[] = "catalog.bin";
 int aprovizioneaza ( int codProdus, int cantitate, int pret, char numeProdus[] ) {
@@ -75,3 +81,28 @@ int cumpara ( int codProdus ) {
 }
 
 
+static struct termios old, new;
+
+
+void initTermios(int echo) 
+{
+  tcgetattr(0, &old); //grab old terminal i/o settings
+  new = old; //make new settings same as old settings
+  new.c_lflag &= ~ICANON; //disable buffered i/o
+  new.c_lflag &= echo ? ECHO : ~ECHO; //set echo mode
+  tcsetattr(0, TCSANOW, &new); //apply terminal io settings
+}
+ 
+/* Restore old terminal i/o settings */
+void resetTermios(void) 
+{
+  tcsetattr(0, TCSANOW, &old);
+}
+
+char getch() {
+    char ch;
+    initTermios(0);
+    ch = getchar();
+    resetTermios();
+    return ch;
+}
