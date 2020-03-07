@@ -7,12 +7,22 @@
 // pentru prototipul functiei getch()
 #include <termios.h>
 
+char filename_catalog[] = "catalog.bin";
+
+void clrscr() {
+    system("@cls||clear");
+}
+
+void printf_3t ( char * s ) {
+	printf("\t\t\t%s\n", s);
+}
+
 char* itoa(int value, char * buffer, int base) {
     sprintf(buffer,"%d",value);
     return buffer;
 }
 
-char filename_catalog[] = "catalog.bin";
+
 int aprovizioneaza ( int codProdus, int cantitate, int pret, char numeProdus[] ) {
     FILE * f;
     if ( !(f=fopen(filename_catalog, "r+b")) ) {
@@ -50,16 +60,31 @@ int verificaStoc ( int codProdus, int * pret, char * nume ) {
     PRODUS prod;
     int ret = 0;
     while ( fread(&prod, sizeof(PRODUS), 1, f) ) {
-	if ( prod.cod == codProdus ) {
-	    *pret = prod.pret;
-	    strcpy(nume, prod.nume);
-	    if ( prod.stoc > 0 ) {
-		ret = 1;
-	    }
-	}
+		if ( prod.cod == codProdus ) {
+			*pret = prod.pret;
+			strcpy(nume, prod.nume);
+			if ( prod.stoc > 0 ) {
+			ret = 1;
+			}
+		}
     }
     fclose(f);
     return ret;
+}
+
+int eProdus ( char tasta ) {
+	int cod = tasta - '0';
+	FILE * f = fopen(filename_catalog, "rb");
+	if ( f == NULL ) return 0;
+    PRODUS prod;
+	while ( fread(&prod, sizeof(PRODUS), 1, f) ) {
+		if ( prod.cod == cod ) {
+			fclose(f);
+			return 1;
+		}
+	}
+	fclose(f);
+	return 0;
 }
 
 int cumpara ( int codProdus ) {

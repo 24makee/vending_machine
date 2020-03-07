@@ -62,7 +62,6 @@ start:
 }
 
 
-
 ///////////CAZUL CARD
 int card_payment(int pret, int entered_pin)
 {
@@ -100,6 +99,7 @@ finish:
         ;
     }
     fclose(f);
+	return 0;
 
 }
 
