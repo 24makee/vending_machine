@@ -73,7 +73,7 @@ int card_payment(int pret, int entered_pin)
 	int ret = 0;
 	size_t soc = sizeof(CREDIT_CARD);
     f=fopen(filename_bank,"r+b");
-	if ( f == NULL ) { return 0; }
+	if ( f == NULL ) { return -2; }
     while ( fread(&card,soc,1,f) ) {
 //        printf("%d %d\n",card.pin,card.balance);
         if ( card.pin == entered_pin ) {

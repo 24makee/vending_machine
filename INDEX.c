@@ -96,6 +96,9 @@ int main()
 					case -2:
 						printf_3t("Card error. No money has been withdrawn");
 						break;
+					case 0:
+						printf_3t("Pin invalid!");
+						break;
 			   }
 			   getch();
             }
@@ -104,6 +107,6 @@ int main()
 
 
 
-	}
+	} //endwhile
     return 0;
 }
