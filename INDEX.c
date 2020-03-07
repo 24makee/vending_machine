@@ -31,7 +31,17 @@ int main()
     tasta = getch();
     if(tasta == '1')
     {
-		cash_payment(&available_money);
+		cpErr = cash_payment(&available_money);
+		if ( cpErr == -1 ) {
+		    //abort cash
+		    if ( available_money > 0 ) {
+			printf("\t\t\tReturning change: $%d\n", available_money);
+			available_money = 0;
+			printf_3t("Press any key to continue");
+			getch();
+		    }
+		    continue;
+		}
 		printf_3t("Choose your product");
 		tasta = getch();
 		if ( eProdus(tasta) ) {

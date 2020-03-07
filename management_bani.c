@@ -20,24 +20,25 @@ void bill(int pret)
 }
 
 /////////CAZUL CASH
-void cash_payment(int *total_introdus)
+int cash_payment(int *total_introdus)
 {
     int bancnota=-1;
     int bani=0;
     char tasta;
 start:
-    printf("\t\t\tEnter one of the following bills: \n");
+    printf("\t\t\tEnter one of the following bills or 0 to cancel: \n");
     printf("\t\t\t    ($1 $5 $10 $20 $50 $100)\n");
     printf("\t\t\t\t\t");
     scanf("%d",&bancnota);
     getchar();
     if(bancnota==1 || bancnota==5 || bancnota==10 || bancnota==20 || bancnota==50 || bancnota==100 )
     {
-        bani=bani+bancnota;
+        *total_introdus += bancnota;
+        bani += bancnota;
         scan_tasta:
         printf("\t\t\tYou have entered $%d \n",bani);
         printf("\t\t\tDo you want to enter more money?\n");
-        printf("\t\t\tPress 1 for YES or 2 for NO\n\n");
+        printf("\t\t\tPress 1 for YES or 2 for NO or 0 to CANCEL\n\n");
         //printf("\t\t\t\t");
         tasta=getch();
        // printf("\n");
@@ -46,18 +47,21 @@ start:
         else if(tasta=='2')
         {
             printf("\t\t\tYou have entered $%d \n",bani);
-            *total_introdus=bani;
+//            *total_introdus=bani;
         }
-        else{
+        else if ( tasta == '0' ) {
+	    return -1;
+        } else{
             printf("\t\t\tInvalid input!\n");
             goto scan_tasta;
         }
-    }
-    else
-    {
+    } else if ( bancnota==0 ) {
+	return -1;
+    } else {
         printf("\t\t\tInvalid bill. Please try again\n");
         goto start;
     }
+    return 1;
 
 }
 
