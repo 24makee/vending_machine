@@ -76,14 +76,13 @@ int main()
                     {
                         printf("*");
                     }*/
-					if ( pin[p] == '\n' || pin[p] == '\r' ) {
+					/*if (4 ) {
 						break;
-					}
+					}*/
 					printf("*");
                     p++;
-                }
-                while(pin[p-1]!='\r');
-                pin[p-1]='\0';
+                } while(p<4);
+                pin[p]='\0';
                 printf("\nYou have entered %s as pin.",pin);
                 getch();
                 card_payment(pret, pin);

@@ -70,37 +70,27 @@ int card_payment(int pret, int entered_pin)
     int pin;
     int ok=0;
     int balance;
+	size_t soc = sizeof(CREDIT_CARD);
     f=fopen(filename_bank,"r+b");
-
-    while(ok==0)
-    {
-        fread(&card,sizeof(CREDIT_CARD),1,f);
-        printf("%d %d\n",card.pin,card.balance);
-        if(card.pin!=entered_pin)
-            goto finish;
-        if(card.balance<pret)
-        {
-            fclose(f);
-            return 0;
-        }
-        else
-        {
-            card.balance=card.balance-pret;
-            fseek(f,-sizeof(CREDIT_CARD),1);
-            if(fwrite(&card,sizeof(CREDIT_CARD),1,f))
-            {
-                fclose(f);
-                return 1;
-
-            }
-
-        }
-finish:
-        ;
-    }
+	if ( f == NULL ) { return 0; }
+    while ( fread(&card,soc,1,f) ) {
+//        printf("%d %d\n",card.pin,card.balance);
+        if ( card.pin == entered_pin ) {
+			if(card.balance<pret) {
+				break;
+			} else {
+				card.balance=card.balance-pret;
+				fseek(f,-sizeof(CREDIT_CARD),1);
+				if( fwrite(&card,sizeof(CREDIT_CARD),1,f) ) {
+					// plata autorizata
+					fclose(f);
+					return 1;
+				}
+			}
+		}
+	}
     fclose(f);
 	return 0;
-
 }
 
 /*int main()
