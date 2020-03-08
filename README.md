@@ -26,6 +26,8 @@ For credit card payment, we choose the product first and after that we have to i
 - User&#39;s balance it&#39;s updated immediately after a transaction
 - In case of &quot;Out of stock&quot; products, the menu updates in real time, after the transaction is successful without restarting the program.
 
+
+**More info in documentation file**
  
 **Authors of the project**
 
