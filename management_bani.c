@@ -10,7 +10,7 @@ char filename_bank[]="banking_info.bin";
 {
     int pin;
     int balance;
-} CREDIT_CARD;*/ 
+} CREDIT_CARD;*/
 //definita in struct.h
 
 
@@ -83,7 +83,7 @@ int card_payment(int pret, int entered_pin)
         if ( card.pin == entered_pin ) {
 			if(card.balance<pret) {
 				ret = -1;
-				error("cardPay:Sarac");
+				error("cardPay:Insufficient funds");
 				break;
 			} else {
 				card.balance=card.balance-pret;

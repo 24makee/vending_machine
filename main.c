@@ -82,7 +82,7 @@ int main()
     } // endif
     else if(tasta == '2')
     {
-        printf("\t\t\tChoose your product\n");
+        printf("\t\t\tChoose your product or press 'x' to restart\n");
         tasta = getch();
         if(tasta=='x')
             goto inceput;
@@ -119,7 +119,7 @@ int main()
 						}
 						break;
 					case -1:
-						printf_3t("Not enough balance on card. Saracule!");
+						printf_3t("Not enough balance on card.");
 						break;
 					case -2:
 						printf_3t("Card error. No money has been withdrawn");
